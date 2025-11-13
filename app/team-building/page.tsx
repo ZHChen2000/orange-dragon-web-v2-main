@@ -133,7 +133,7 @@ export default function TeamBuildingPage() {
         {/* 活动统计 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           <div className="bg-white rounded-xl p-6 text-center shadow-lg">
-            <div className="text-3xl font-bold text-orange-600 mb-2">50+</div>
+            <div className="text-3xl font-bold text-orange-600 mb-2">5+</div>
             <div className="text-gray-600">年度活动次数</div>
           </div>
           <div className="bg-white rounded-xl p-6 text-center shadow-lg">

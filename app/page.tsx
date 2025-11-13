@@ -353,7 +353,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-br from-orange-400/10 to-orange-600/10 rounded-2xl animate-pulse-glow-subtle"></div>
                   <div className="relative z-10 p-6 transform group-hover:scale-105 transition-all duration-500 ease-out">
                     <div className="text-4xl font-bold text-orange-600 mb-2 animate-count-up group-hover:scale-110 transition-transform duration-300 ease-out">
-                      <AnimatedCounter target="50" suffix="+" className="inline-block" />
+                      <AnimatedCounter target="100" suffix="+" className="inline-block" />
                     </div>
                     <div className="text-gray-600 font-medium group-hover:text-orange-700 transition-colors duration-300">出版书籍</div>
                     <div className="absolute top-2 right-2 w-2 h-2 bg-orange-400 rounded-full animate-pulse-glow-subtle"></div>
@@ -366,7 +366,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-blue-600/10 rounded-2xl animate-pulse-glow-subtle" style={{animationDelay: '0.5s'}}></div>
                   <div className="relative z-10 p-6 transform group-hover:scale-105 transition-all duration-500 ease-out">
                     <div className="text-4xl font-bold text-blue-600 mb-2 animate-count-up group-hover:scale-110 transition-transform duration-300 ease-out">
-                      <AnimatedCounter target="100" suffix="+" className="inline-block" />
+                      <AnimatedCounter target="20" suffix="+" className="inline-block" />
                     </div>
                     <div className="text-gray-600 font-medium group-hover:text-blue-700 transition-colors duration-300">技术专利</div>
                     <div className="absolute top-2 right-2 w-2 h-2 bg-blue-400 rounded-full animate-pulse-glow-subtle" style={{animationDelay: '0.5s'}}></div>
@@ -379,7 +379,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-br from-green-400/10 to-green-600/10 rounded-2xl animate-pulse-glow-subtle" style={{animationDelay: '1s'}}></div>
                   <div className="relative z-10 p-6 transform group-hover:scale-105 transition-all duration-500 ease-out">
                     <div className="text-4xl font-bold text-green-600 mb-2 animate-count-up group-hover:scale-110 transition-transform duration-300 ease-out">
-                      <AnimatedCounter target="1000" suffix="+" className="inline-block" />
+                      <AnimatedCounter target="50" suffix="+" className="inline-block" />
                     </div>
                     <div className="text-gray-600 font-medium group-hover:text-green-700 transition-colors duration-300">服务客户</div>
                     <div className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse-glow-subtle" style={{animationDelay: '1s'}}></div>
@@ -396,6 +396,48 @@ export default function Home() {
                     </div>
                     <div className="text-gray-600 font-medium group-hover:text-purple-700 transition-colors duration-300">行业经验</div>
                     <div className="absolute top-2 right-2 w-2 h-2 bg-purple-400 rounded-full animate-pulse-glow-subtle" style={{animationDelay: '1.5s'}}></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 合作出版社 */}
+        <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50 relative overflow-hidden">
+          {/* 背景装饰 */}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-orange-200/20 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+          
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-12 animate-fade-in-up">
+              <h2 className="text-4xl font-bold text-amber-600 tracking-wide mb-4 gradient-text">合作出版社</h2>
+              <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full mb-4 animate-pulse-glow"></div>
+            </div>
+            <div className="bg-white rounded-3xl shadow-2xl p-12 hover-card animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+              <div className="text-center">
+                <div className="text-5xl mb-6 animate-float">📚</div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-6">优质出版资源，专业服务保障</h3>
+                <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-4xl mx-auto">
+                  我们依托<strong className="text-amber-600">清华大学出版社</strong>、<strong className="text-amber-600">电子工业出版社</strong>、<strong className="text-amber-600">机械工业出版社</strong>、<strong className="text-amber-600">人民邮电出版社</strong>四大出版社及行业内顶级刊物出版商，为作者和读者提供专业的出版服务。
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+                  <div className="text-center p-4 bg-amber-50 rounded-xl hover-card">
+                    <div className="text-3xl mb-2">🏛️</div>
+                    <div className="font-semibold text-gray-800 text-sm">清华大学出版社</div>
+                  </div>
+                  <div className="text-center p-4 bg-amber-50 rounded-xl hover-card">
+                    <div className="text-3xl mb-2">📖</div>
+                    <div className="font-semibold text-gray-800 text-sm">电子工业出版社</div>
+                  </div>
+                  <div className="text-center p-4 bg-amber-50 rounded-xl hover-card">
+                    <div className="text-3xl mb-2">⚙️</div>
+                    <div className="font-semibold text-gray-800 text-sm">机械工业出版社</div>
+                  </div>
+                  <div className="text-center p-4 bg-amber-50 rounded-xl hover-card">
+                    <div className="text-3xl mb-2">📰</div>
+                    <div className="font-semibold text-gray-800 text-sm">人民邮电出版社</div>
                   </div>
                 </div>
               </div>
@@ -510,43 +552,45 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
                 <div className="text-center mb-4">
-                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">🐶</div>
-                  <h4 className="text-lg font-bold text-orange-700">财务总监：旺财</h4>
-                  <p className="text-orange-600 text-sm">财务专家</p>
-                </div>
-                <p className="text-gray-700 text-center">作为公司的财务总监，旺财以其敏锐的嗅觉和精密的计算能力，守护公司的每一笔资金，是公司财富的忠诚守护者。</p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-                <div className="text-center mb-4">
-                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">🐉</div>
-                  <h4 className="text-lg font-bold text-orange-700">前端工程师：菜菜龙</h4>
+                  <h4 className="text-lg font-bold text-orange-700 mb-2">前端工程师</h4>
                   <p className="text-orange-600 text-sm">UI/UX专家</p>
                 </div>
-                <p className="text-gray-700 text-center">菜菜龙专注于打造用户友好的界面和流畅的交互体验，用精湛的前端技术呈现公司形象与服务。</p>
+                <p className="text-gray-700 text-center">专注于打造用户友好的界面和流畅的交互体验，运用前沿的前端技术呈现公司形象与服务，提升用户体验。</p>
               </div>
               <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
                 <div className="text-center mb-4">
-                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">🐺</div>
-                  <h4 className="text-lg font-bold text-orange-700">后端工程师：小狼</h4>
+                  <h4 className="text-lg font-bold text-orange-700 mb-2">后端工程师</h4>
                   <p className="text-orange-600 text-sm">系统架构师</p>
                 </div>
-                <p className="text-gray-700 text-center">小狼构建稳健高效的后台服务，为网站各项功能提供强大的技术支撑，是公司业务稳定运行的基石。</p>
+                <p className="text-gray-700 text-center">构建稳健高效的后台服务系统，为网站各项功能提供强大的技术支撑，确保公司业务稳定运行和系统可扩展性。</p>
               </div>
               <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
                 <div className="text-center mb-4">
-                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">🦈</div>
-                  <h4 className="text-lg font-bold text-orange-700">技术支持专家：鲨鲨</h4>
-                  <p className="text-orange-600 text-sm">技术顾问</p>
-                </div>
-                <p className="text-gray-700 text-center">鲨鲨凭借深厚的技术积累，为客户提供专业的技术咨询与支持服务，耐心解答疑问，确保用户获得最佳体验。</p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-                <div className="text-center mb-4">
-                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">🥚</div>
-                  <h4 className="text-lg font-bold text-orange-700">客服：旦旦</h4>
+                  <h4 className="text-lg font-bold text-orange-700 mb-2">客户服务专员</h4>
                   <p className="text-orange-600 text-sm">客户服务专家</p>
                 </div>
-                <p className="text-gray-700 text-center">旦旦以真诚热情的服务态度，在线解答客户疑问，收集用户反馈，是公司与客户沟通的重要桥梁。</p>
+                <p className="text-gray-700 text-center">以专业热情的服务态度，及时响应客户需求，在线解答客户疑问，收集用户反馈，是公司与客户沟通的重要桥梁。</p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                <div className="text-center mb-4">
+                  <h4 className="text-lg font-bold text-orange-700 mb-2">责任编辑</h4>
+                  <p className="text-orange-600 text-sm">内容编辑专家</p>
+                </div>
+                <p className="text-gray-700 text-center">负责图书、教材等出版物的内容审核、编辑与校对工作，确保出版内容的质量、准确性和规范性，提升出版物的专业水准。</p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                <div className="text-center mb-4">
+                  <h4 className="text-lg font-bold text-orange-700 mb-2">封面设计</h4>
+                  <p className="text-orange-600 text-sm">视觉设计专家</p>
+                </div>
+                <p className="text-gray-700 text-center">负责图书封面、宣传材料等视觉设计工作，运用专业的设计理念和创意，打造符合品牌调性的视觉形象，提升产品的市场吸引力。</p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-lg border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                <div className="text-center mb-4">
+                  <h4 className="text-lg font-bold text-orange-700 mb-2">撰稿员</h4>
+                  <p className="text-orange-600 text-sm">内容创作专家（可兼职）</p>
+                </div>
+                <p className="text-gray-700 text-center">负责技术文档、教材内容、宣传文案等各类文稿的撰写工作，具备扎实的文字功底和专业知识，能够创作高质量的内容作品。</p>
               </div>
             </div>
           </div>
@@ -675,6 +719,45 @@ export default function Home() {
                   <div>
                     <div className="font-semibold text-gray-800">王老师</div>
                     <div className="text-sm text-gray-600">某培训机构</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-lg hover-card animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+                <div className="flex items-center mb-4">
+                  <div className="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p className="text-gray-700 mb-4">"与橙龙科技合作出版的技术书籍，从内容到排版都非常专业，值得推荐。"</p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-3 animate-float" style={{animationDelay: '1.5s'}}>刘</div>
+                  <div>
+                    <div className="font-semibold text-gray-800">刘博士</div>
+                    <div className="text-sm text-gray-600">某大学教师</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-lg hover-card animate-fade-in-up" style={{animationDelay: '0.5s'}}>
+                <div className="flex items-center mb-4">
+                  <div className="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p className="text-gray-700 mb-4">"他们的嵌入式开发教学资源非常实用，帮助我们的学生快速掌握核心技术。"</p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold mr-3 animate-float" style={{animationDelay: '2s'}}>陈</div>
+                  <div>
+                    <div className="font-semibold text-gray-800">陈主任</div>
+                    <div className="text-sm text-gray-600">某职业技术学院</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-lg hover-card animate-fade-in-up" style={{animationDelay: '0.6s'}}>
+                <div className="flex items-center mb-4">
+                  <div className="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p className="text-gray-700 mb-4">"橙龙科技的服务态度很好，响应及时，从咨询到出版全程都有专人跟进。"</p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center text-white font-bold mr-3 animate-float" style={{animationDelay: '2.5s'}}>赵</div>
+                  <div>
+                    <div className="font-semibold text-gray-800">赵老师</div>
+                    <div className="text-sm text-gray-600">独立作者</div>
                   </div>
                 </div>
               </div>
