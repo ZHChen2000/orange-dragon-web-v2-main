@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import ContactSection from '../components/ContactSection';
 import Navigation from '../components/Navigation';
 
@@ -172,6 +173,14 @@ export default function Home() {
     }
   };
 
+  // 滚动到业务展示部分
+  const scrollToBusinessGallery = () => {
+    const businessGallerySection = document.getElementById('business-gallery');
+    if (businessGallerySection) {
+      businessGallerySection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // 联系我们的模态框
   const ContactModal = () => {
     if (!showContactModal) return null;
@@ -256,20 +265,36 @@ export default function Home() {
 
       {/* 快速链接收缩栏 */}
       <section className="relative border-b border-gray-100/50 overflow-hidden">
-        {/* 收缩按钮栏 */}
+        {/* 收缩按钮栏 - 美化设计 */}
         <button
           onClick={() => setQuickLinksExpanded(!quickLinksExpanded)}
-          className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 transition-colors duration-200 group"
+          className="w-full relative flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 hover:from-orange-600 hover:via-orange-500 hover:to-yellow-500 transition-all duration-300 group shadow-md hover:shadow-xl overflow-hidden"
         >
-          <span className="text-sm font-medium text-gray-600 group-hover:text-orange-600 transition-colors duration-200">公司详情页</span>
-          <svg 
-            className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${quickLinksExpanded ? 'rotate-180' : ''}`}
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+          {/* 背景装饰元素 */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-x-16 -translate-y-16 group-hover:scale-150 transition-transform duration-700"></div>
+          <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl translate-x-20 translate-y-20 group-hover:scale-150 transition-transform duration-700"></div>
+          
+          {/* 内容 */}
+          <div className="relative z-10 flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+              <span className="text-lg">📋</span>
+            </div>
+            <span className="text-base font-semibold text-white drop-shadow-lg group-hover:scale-105 transition-transform duration-300">
+              公司详情页
+            </span>
+            <svg 
+              className={`w-5 h-5 text-white drop-shadow-lg transition-all duration-300 ${quickLinksExpanded ? 'rotate-180' : ''} group-hover:scale-110`}
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          
+          {/* 底部光效 */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
         
         {/* 可展开的内容区域 */}
@@ -403,7 +428,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{animationDelay: '0.4s'}}>
                 <button 
-                  onClick={scrollToAbout}
+                  onClick={scrollToBusinessGallery}
                   className="group bg-white text-orange-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-50 transition-all duration-300 transform hover:scale-105 shadow-lg relative overflow-hidden btn-glow animate-pulse-glow"
                 >
                   <span className="relative z-10">了解更多</span>
@@ -488,8 +513,237 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 业务图片展示 */}
+        <section id="business-gallery" className="py-20 bg-white relative overflow-hidden">
+          {/* 背景装饰 */}
+          <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-orange-100/20 rounded-full blur-3xl animate-float"></div>
+          <div className="hidden md:block absolute bottom-0 right-0 w-80 h-80 bg-yellow-100/20 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* 主标题 */}
+            <div className="text-center mb-16 animate-fade-in-up">
+              <h2 className="text-4xl font-bold text-orange-600 tracking-wide mb-4 gradient-text">业务展示</h2>
+              <div className="w-24 h-1 bg-orange-500 mx-auto rounded-full mb-4 animate-pulse-glow"></div>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">看看我们的作品，了解我们的业务</p>
+            </div>
+
+            {/* 板块一：已出版图书展示 */}
+            <div className="mb-20 animate-fade-in-up" style={{animationDelay: '0.1s'}}>
+              <div className="text-center mb-10">
+                <h3 className="text-3xl font-bold text-gray-800 mb-3">已出版图书</h3>
+                <div className="w-16 h-0.5 bg-orange-400 mx-auto rounded-full"></div>
+                <p className="text-gray-600 mt-4">我们出版的优质技术图书</p>
+              </div>
+              
+              {/* 图书网格 - 6本书一行显示 */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
+                <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white p-2 md:p-3">
+                  <div className="relative w-full aspect-[2/3] bg-gray-50 rounded-lg overflow-hidden">
+                    <Image 
+                      src="/business-images/image-1.png" 
+                      alt="已出版图书 1"
+                      width={600}
+                      height={900}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2 rounded-xl">
+                    <p className="text-white text-xs md:text-sm font-medium">已出版图书 1</p>
+                  </div>
+                </div>
+                
+                <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white p-2 md:p-3">
+                  <div className="relative w-full aspect-[2/3] bg-gray-50 rounded-lg overflow-hidden">
+                    <Image 
+                      src="/business-images/image-2.png" 
+                      alt="已出版图书 2"
+                      width={600}
+                      height={900}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2 rounded-xl">
+                    <p className="text-white text-xs md:text-sm font-medium">已出版图书 2</p>
+                  </div>
+                </div>
+                
+                <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white p-2 md:p-3">
+                  <div className="relative w-full aspect-[2/3] bg-gray-50 rounded-lg overflow-hidden">
+                    <Image 
+                      src="/business-images/image-3.png" 
+                      alt="已出版图书 3"
+                      width={600}
+                      height={900}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2 rounded-xl">
+                    <p className="text-white text-xs md:text-sm font-medium">已出版图书 3</p>
+                  </div>
+                </div>
+                
+                <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white p-2 md:p-3">
+                  <div className="relative w-full aspect-[2/3] bg-gray-50 rounded-lg overflow-hidden">
+                    <Image 
+                      src="/business-images/image-4.png" 
+                      alt="已出版图书 4"
+                      width={600}
+                      height={900}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2 rounded-xl">
+                    <p className="text-white text-xs md:text-sm font-medium">已出版图书 4</p>
+                  </div>
+                </div>
+                
+                <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white p-2 md:p-3">
+                  <div className="relative w-full aspect-[2/3] bg-gray-50 rounded-lg overflow-hidden">
+                    <Image 
+                      src="/business-images/image-5.png" 
+                      alt="已出版图书 5"
+                      width={600}
+                      height={900}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2 rounded-xl">
+                    <p className="text-white text-xs md:text-sm font-medium">已出版图书 5</p>
+                  </div>
+                </div>
+                
+                <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white p-2 md:p-3">
+                  <div className="relative w-full aspect-[2/3] bg-gray-50 rounded-lg overflow-hidden">
+                    <Image 
+                      src="/business-images/image-6.png" 
+                      alt="已出版图书 6"
+                      width={600}
+                      height={900}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2 rounded-xl">
+                    <p className="text-white text-xs md:text-sm font-medium">已出版图书 6</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 板块二：软件开发业务展示 */}
+            <div className="animate-fade-in-up" style={{animationDelay: '0.3s'}}>
+              <div className="text-center mb-10">
+                <h3 className="text-3xl font-bold text-gray-800 mb-3">软件开发与集成</h3>
+                <div className="w-16 h-0.5 bg-blue-400 mx-auto rounded-full"></div>
+                <p className="text-gray-600 mt-4">专业的软件开发与系统集成服务</p>
+              </div>
+              
+              {/* 代码截图网格 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-gray-900 to-gray-800">
+                  <div className="relative w-full aspect-[16/10] overflow-hidden">
+                    <Image 
+                      src="/business-images/code-1.png" 
+                      alt="socket.io项目"
+                      width={1200}
+                      height={750}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const placeholder = target.nextElementSibling as HTMLElement;
+                        if (placeholder) placeholder.style.display = 'flex';
+                      }}
+                    />
+                    {/* 占位符 */}
+                    <div className="hidden w-full h-full items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+                      <div className="text-center text-white/80">
+                        <div className="text-6xl mb-4">💻</div>
+                        <p className="text-lg font-medium mb-2">代码截图 1</p>
+                        <p className="text-sm text-white/60">请添加图片到</p>
+                        <p className="text-xs text-white/50 mt-1">/public/business-images/code-1.png</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 rounded-2xl">
+                    <p className="text-white font-medium">socket.io项目</p>
+                  </div>
+                </div>
+                
+                <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-gray-900 to-gray-800">
+                  <div className="relative w-full aspect-[16/10] overflow-hidden">
+                    <Image 
+                      src="/business-images/code-2.png" 
+                      alt="嵌入式教学项目"
+                      width={1200}
+                      height={750}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const placeholder = target.nextElementSibling as HTMLElement;
+                        if (placeholder) placeholder.style.display = 'flex';
+                      }}
+                    />
+                    {/* 占位符 */}
+                    <div className="hidden w-full h-full items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+                      <div className="text-center text-white/80">
+                        <div className="text-6xl mb-4">⚙️</div>
+                        <p className="text-lg font-medium mb-2">代码截图 2</p>
+                        <p className="text-sm text-white/60">请添加图片到</p>
+                        <p className="text-xs text-white/50 mt-1">/public/business-images/code-2.png</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 rounded-2xl">
+                    <p className="text-white font-medium">嵌入式教学项目</p>
+                  </div>
+                </div>
+                
+                <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-gray-900 to-gray-800">
+                  <div className="relative w-full aspect-[16/10] overflow-hidden">
+                    <Image 
+                      src="/business-images/code-3.png" 
+                      alt="计算机基本课程教学项目"
+                      width={1200}
+                      height={750}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const placeholder = target.nextElementSibling as HTMLElement;
+                        if (placeholder) placeholder.style.display = 'flex';
+                      }}
+                    />
+                    {/* 占位符 */}
+                    <div className="hidden w-full h-full items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+                      <div className="text-center text-white/80">
+                        <div className="text-6xl mb-4">🔧</div>
+                        <p className="text-lg font-medium mb-2">代码截图 3</p>
+                        <p className="text-sm text-white/60">请添加图片到</p>
+                        <p className="text-xs text-white/50 mt-1">/public/business-images/code-3.png</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 rounded-2xl">
+                    <p className="text-white font-medium">计算机基本课程教学项目</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 合作出版社 */}
-        <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50 relative overflow-hidden">
+        <section id="publishers" className="py-20 bg-gradient-to-br from-amber-50 to-orange-50 relative overflow-hidden">
           {/* 背景装饰 */}
           <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-float"></div>
           <div className="hidden md:block absolute bottom-0 right-0 w-80 h-80 bg-orange-200/20 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
@@ -596,7 +850,7 @@ export default function Home() {
         <section id="team" className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-orange-600 tracking-wide mb-4">公司创始人</h2>
+              <h2 className="text-4xl font-bold text-orange-600 tracking-wide mb-4">核心成员</h2>
               <div className="w-24 h-1 bg-orange-500 mx-auto rounded-full mb-4"></div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

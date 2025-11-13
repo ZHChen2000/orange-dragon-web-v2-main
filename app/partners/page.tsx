@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import BackToHomeButton from '@/components/BackToHomeButton';
 import Navigation from '../../components/Navigation';
 
@@ -64,44 +65,140 @@ export default function PartnersPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="text-center">
-                <div className="text-4xl mb-4">🏫</div>
+                <div className="flex justify-center mb-4 h-16 items-center">
+                  <Image 
+                    src="/university-logos/njust.png" 
+                    alt="南京理工大学校徽"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                    unoptimized
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'block';
+                    }}
+                  />
+                  <div className="hidden text-4xl">🏫</div>
+                </div>
                 <h3 className="text-lg font-bold text-gray-800 mb-2">南京理工大学</h3>
                 <p className="text-sm text-gray-600">在嵌入式系统、人工智能等领域开展学术论文发表与专利申请合作</p>
               </div>
             </div>
             <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="text-center">
-                <div className="text-4xl mb-4">🏫</div>
+                <div className="flex justify-center mb-4 h-16 items-center">
+                  <Image 
+                    src="/university-logos/bit.png" 
+                    alt="北京理工大学校徽"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                    unoptimized
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'block';
+                    }}
+                  />
+                  <div className="hidden text-4xl">🏫</div>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">北京理工大学</h3>
+                <p className="text-sm text-gray-600">在计算机科学、自动化控制、人工智能等领域进行学术交流与技术合作</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="text-center">
+                <div className="flex justify-center mb-4 h-16 items-center">
+                  <Image 
+                    src="/university-logos/buaa.png" 
+                    alt="北京航空航天大学校徽"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                    unoptimized
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'block';
+                    }}
+                  />
+                  <div className="hidden text-4xl">🏫</div>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">北京航空航天大学</h3>
+                <p className="text-sm text-gray-600">在航空航天电子、嵌入式控制、人工智能等领域开展技术合作与学术论文发表</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="text-center">
+                <div className="flex justify-center mb-4 h-16 items-center">
+                  <Image 
+                    src="/university-logos/seu.png" 
+                    alt="东南大学校徽"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                    unoptimized
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'block';
+                    }}
+                  />
+                  <div className="hidden text-4xl">🏫</div>
+                </div>
                 <h3 className="text-lg font-bold text-gray-800 mb-2">东南大学</h3>
                 <p className="text-sm text-gray-600">在计算机科学与技术、电子工程等专业领域进行学术交流与成果转化</p>
               </div>
             </div>
             <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="text-center">
-                <div className="text-4xl mb-4">🏫</div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">南京航空航天大学</h3>
-                <p className="text-sm text-gray-600">在航空航天电子、嵌入式控制等领域开展技术合作与学术论文发表</p>
+                <div className="flex justify-center mb-4 h-16 items-center">
+                  <Image 
+                    src="/university-logos/tsinghua.png" 
+                    alt="清华大学校徽"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                    unoptimized
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'block';
+                    }}
+                  />
+                  <div className="hidden text-4xl">🏫</div>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">清华大学</h3>
+                <p className="text-sm text-gray-600">在人工智能、计算机科学、大模型开发等领域开展深度学术合作与成果转化</p>
               </div>
             </div>
             <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="text-center">
-                <div className="text-4xl mb-4">🏫</div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">南京邮电大学</h3>
-                <p className="text-sm text-gray-600">在通信技术、物联网、嵌入式系统等领域进行学术研究与专利申请合作</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-center">
-                <div className="text-4xl mb-4">🏫</div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">江苏大学</h3>
-                <p className="text-sm text-gray-600">在机械电子工程、自动化控制等领域开展技术推广与学术论文发表</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-center">
-                <div className="text-4xl mb-4">🏫</div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">南京工业大学</h3>
-                <p className="text-sm text-gray-600">在工业自动化、嵌入式开发等领域进行技术合作与成果转化</p>
+                <div className="flex justify-center mb-4 h-16 items-center">
+                  <Image 
+                    src="/university-logos/nju.png" 
+                    alt="南京大学校徽"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                    unoptimized
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'block';
+                    }}
+                  />
+                  <div className="hidden text-4xl">🏫</div>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">南京大学</h3>
+                <p className="text-sm text-gray-600">在计算机科学、人工智能、软件工程等领域进行学术研究与技术合作</p>
               </div>
             </div>
           </div>

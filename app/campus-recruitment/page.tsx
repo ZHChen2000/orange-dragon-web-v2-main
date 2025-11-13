@@ -449,7 +449,9 @@ export default function CampusRecruitmentPage() {
                   <span className="text-2xl mr-3">📧</span>
                   <div>
                     <div className="font-semibold text-gray-800">邮箱</div>
-                    <div className="text-orange-600">hr@orangedragon.com</div>
+                    <a href="mailto:zhchen2000@foxmail.com" className="text-orange-600 hover:text-orange-700 hover:underline">
+                      zhchen2000@foxmail.com
+                    </a>
                   </div>
                 </div>
                 
@@ -457,7 +459,9 @@ export default function CampusRecruitmentPage() {
                   <span className="text-2xl mr-3">📞</span>
                   <div>
                     <div className="font-semibold text-gray-800">电话</div>
-                    <div className="text-orange-600">025-12345678</div>
+                    <a href="tel:+8613201301067" className="text-orange-600 hover:text-orange-700 hover:underline">
+                      +86 13201301067
+                    </a>
                   </div>
                 </div>
                 
@@ -465,7 +469,7 @@ export default function CampusRecruitmentPage() {
                   <span className="text-2xl mr-3">💬</span>
                   <div>
                     <div className="font-semibold text-gray-800">微信</div>
-                    <div className="text-orange-600">OrangeDragon_HR</div>
+                    <div className="text-orange-600">zhchen_wx_me</div>
                   </div>
                 </div>
                 

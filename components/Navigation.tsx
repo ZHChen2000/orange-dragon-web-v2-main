@@ -21,11 +21,13 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200 font-medium"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-orange-600 rounded-lg transition-all duration-200 font-medium group relative"
                 aria-expanded={dropdownOpen}
                 aria-haspopup="true"
               >
-                <span>快速到达</span>
+                <span>快速访问</span>
+                {/* 点击小手图标 - 带动画效果 */}
+                <span className="text-lg animate-bounce group-hover:animate-none group-hover:scale-110 transition-transform duration-200">👆</span>
                 <svg 
                   className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
                   fill="none" 
@@ -45,7 +47,21 @@ export default function Navigation() {
                     onClick={() => setDropdownOpen(false)}
                   />
                   {/* 菜单内容 */}
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 py-2">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-2xl z-50 py-2 overflow-hidden">
+                    <Link 
+                      href="/#business-gallery"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
+                    >
+                      业务展示
+                    </Link>
+                    <Link 
+                      href="/#publishers"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
+                    >
+                      合作出版社
+                    </Link>
                     <Link 
                       href="/#about"
                       onClick={() => setDropdownOpen(false)}
