@@ -335,22 +335,24 @@ body {
   left: 100%;
 }
 
-/* 滚动条美化 */
+/* 滚动条美化 - 科技风格 */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: rgba(26, 26, 46, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #f97316, #fbbf24);
+  background: linear-gradient(180deg, rgba(74, 144, 226, 0.6), rgba(102, 126, 234, 0.6));
   border-radius: 4px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #ea580c, #f59e0b);
+  background: linear-gradient(180deg, rgba(74, 144, 226, 0.8), rgba(102, 126, 234, 0.8));
+  border-color: rgba(0, 255, 255, 0.4);
 }
 
 /* 选择文本效果 */
@@ -401,6 +403,11 @@ body {
 
 .quick-link-card:hover {
   transform: translateY(-4px) translateZ(0);
+}
+
+/* 径向渐变支持 */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
 /* 移动端性能优化：减少blur和复杂效果 */

@@ -76,6 +76,83 @@ function AnimatedCounter({ target, suffix = '', duration = 2000, className = '' 
   );
 }
 
+// 联系我们的模态框组件
+function ContactModal({ showContactModal, setShowContactModal }: { showContactModal: boolean; setShowContactModal: (show: boolean) => void }) {
+  if (!showContactModal) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
+        <button
+          onClick={() => setShowContactModal(false)}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+        >
+          ✕
+        </button>
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-bold text-orange-600 mb-2">联系我们</h3>
+          <div className="w-16 h-1 bg-orange-500 mx-auto rounded-full"></div>
+        </div>
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg">
+            <span className="text-2xl">📍</span>
+            <div>
+              <div className="font-semibold text-gray-800">公司地址</div>
+              <div className="text-sm text-gray-600">江苏省南京市秦淮区光华路街道光华路127号3层304F室</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+            <span className="text-2xl">📞</span>
+            <div>
+              <div className="font-semibold text-gray-800">联系电话</div>
+              <a 
+                href="tel:+8613201301067" 
+                className="text-sm text-blue-600 hover:text-blue-800 underline hover:no-underline transition-all duration-200 hover:scale-105 inline-block"
+              >
+                +86 13201301067
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+            <span className="text-2xl">📧</span>
+            <div>
+              <div className="font-semibold text-gray-800">电子邮箱</div>
+              <a 
+                href="mailto:zhchen2000@foxmail.com" 
+                className="text-sm text-green-600 hover:text-green-800 underline hover:no-underline transition-all duration-200 hover:scale-105 inline-block"
+              >
+                zhchen2000@foxmail.com
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+            <span className="text-2xl">🌐</span>
+            <div>
+              <div className="font-semibold text-gray-800">官方网站</div>
+              <a 
+                href="https://www.orandrag.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-purple-600 hover:text-purple-800 underline hover:no-underline transition-all duration-200 hover:scale-105 inline-block"
+              >
+                https://www.orandrag.com/
+                <span className="ml-1 text-xs">↗</span>
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
+            <span className="text-2xl">⏰</span>
+            <div>
+              <div className="font-semibold text-gray-800">工作时间</div>
+              <div className="text-sm text-gray-600">周一至周五 9:00-17:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -83,7 +160,6 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('');
   const [showContactModal, setShowContactModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [quickLinksExpanded, setQuickLinksExpanded] = useState(false);
   const isClient = useIsClient();
 
   useEffect(() => {
@@ -181,199 +257,54 @@ export default function Home() {
     }
   };
 
-  // 联系我们的模态框
-  const ContactModal = () => {
-    if (!showContactModal) return null;
-
-    return (
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
-          <button
-            onClick={() => setShowContactModal(false)}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
-          >
-            ✕
-          </button>
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold text-orange-600 mb-2">联系我们</h3>
-            <div className="w-16 h-1 bg-orange-500 mx-auto rounded-full"></div>
-          </div>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg">
-              <span className="text-2xl">📍</span>
-              <div>
-                <div className="font-semibold text-gray-800">公司地址</div>
-                <div className="text-sm text-gray-600">江苏省南京市秦淮区光华路街道光华路127号3层304F室</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-              <span className="text-2xl">📞</span>
-              <div>
-                <div className="font-semibold text-gray-800">联系电话</div>
-                <a 
-                  href="tel:+8613201301067" 
-                  className="text-sm text-blue-600 hover:text-blue-800 underline hover:no-underline transition-all duration-200 hover:scale-105 inline-block"
-                >
-                  +86 13201301067
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <span className="text-2xl">📧</span>
-              <div>
-                <div className="font-semibold text-gray-800">电子邮箱</div>
-                <a 
-                  href="mailto:zhchen2000@foxmail.com" 
-                  className="text-sm text-green-600 hover:text-green-800 underline hover:no-underline transition-all duration-200 hover:scale-105 inline-block"
-                >
-                  zhchen2000@foxmail.com
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
-              <span className="text-2xl">🌐</span>
-              <div>
-                <div className="font-semibold text-gray-800">官方网站</div>
-                <a 
-                  href="https://www.orandrag.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-sm text-purple-600 hover:text-purple-800 underline hover:no-underline transition-all duration-200 hover:scale-105 inline-block"
-                >
-                  https://www.orandrag.com/
-                  <span className="ml-1 text-xs">↗</span>
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
-              <span className="text-2xl">⏰</span>
-              <div>
-                <div className="font-semibold text-gray-800">工作时间</div>
-                <div className="text-sm text-gray-600">周一至周五 9:00-17:00</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="min-h-screen">
       {/* 导航栏 */}
       <Navigation />
 
-      {/* 快速链接收缩栏 */}
-      <section className="relative border-b border-gray-100/50 overflow-hidden">
-        {/* 收缩按钮栏 - 美化设计 */}
-        <button
-          onClick={() => setQuickLinksExpanded(!quickLinksExpanded)}
-          className="w-full relative flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 hover:from-orange-600 hover:via-orange-500 hover:to-yellow-500 transition-all duration-300 group shadow-md hover:shadow-xl overflow-hidden"
-        >
-          {/* 背景装饰元素 */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-x-16 -translate-y-16 group-hover:scale-150 transition-transform duration-700"></div>
-          <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl translate-x-20 translate-y-20 group-hover:scale-150 transition-transform duration-700"></div>
-          
-          {/* 内容 */}
-          <div className="relative z-10 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-              <span className="text-lg">📋</span>
-            </div>
-            <span className="text-base font-semibold text-white drop-shadow-lg group-hover:scale-105 transition-transform duration-300">
-              公司详情页
-            </span>
-            <svg 
-              className={`w-5 h-5 text-white drop-shadow-lg transition-all duration-300 ${quickLinksExpanded ? 'rotate-180' : ''} group-hover:scale-110`}
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
+      {/* 公司详情页 - 简洁文字链接 */}
+      <section className="relative border-b border-cyan-500/20 bg-gradient-to-r from-[#1a1a2e] via-[#16213e] to-[#0f3460] py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <a 
+              href="/campus-recruitment" 
+              className="text-sm md:text-base text-white/80 hover:text-cyan-300 transition-colors duration-200 relative group"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-          
-          {/* 底部光效 */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </button>
-        
-        {/* 可展开的内容区域 */}
-        <div 
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            quickLinksExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="relative bg-gradient-to-b from-gray-50 via-white to-white py-6">
-            {/* 装饰性背景元素 */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-0 left-1/4 w-32 h-32 bg-orange-100/20 rounded-full blur-3xl"></div>
-              <div className="absolute top-0 right-1/4 w-40 h-40 bg-yellow-100/20 rounded-full blur-3xl"></div>
-            </div>
-            
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              {/* 链接卡片 */}
-              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-3">
-                <a 
-                  href="/campus-recruitment" 
-                  onClick={() => setQuickLinksExpanded(false)}
-                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center group-hover:from-purple-200 group-hover:to-purple-300 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-2xl">🎓</span>
-                  </div>
-                  <span className="text-sm font-semibold text-gray-700 group-hover:text-purple-700 transition-colors duration-300">校园招聘</span>
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-50/0 to-purple-100/0 group-hover:from-purple-50/50 group-hover:to-purple-100/30 transition-all duration-300 pointer-events-none"></div>
-                </a>
-                
-                <a 
-                  href="/team-building" 
-                  onClick={() => setQuickLinksExpanded(false)}
-                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:from-blue-200 group-hover:to-blue-300 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-2xl">👥</span>
-                  </div>
-                  <span className="text-sm font-semibold text-gray-700 group-hover:text-blue-700 transition-colors duration-300">公司团建</span>
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-50/0 to-blue-100/0 group-hover:from-blue-50/50 group-hover:to-blue-100/30 transition-all duration-300 pointer-events-none"></div>
-                </a>
-                
-                <a 
-                  href="/partners" 
-                  onClick={() => setQuickLinksExpanded(false)}
-                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-amber-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center group-hover:from-amber-200 group-hover:to-amber-300 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-2xl">🤝</span>
-                  </div>
-                  <span className="text-sm font-semibold text-gray-700 group-hover:text-amber-700 transition-colors duration-300">公司合作伙伴</span>
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-50/0 to-amber-100/0 group-hover:from-amber-50/50 group-hover:to-amber-100/30 transition-all duration-300 pointer-events-none"></div>
-                </a>
-                
-                <a 
-                  href="/financial-reports" 
-                  onClick={() => setQuickLinksExpanded(false)}
-                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-pink-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center group-hover:from-pink-200 group-hover:to-pink-300 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-2xl">📊</span>
-                  </div>
-                  <span className="text-sm font-semibold text-gray-700 group-hover:text-pink-700 transition-colors duration-300">公司财报</span>
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-50/0 to-pink-100/0 group-hover:from-pink-50/50 group-hover:to-pink-100/30 transition-all duration-300 pointer-events-none"></div>
-                </a>
-                
-                <a 
-                  href="/downloads" 
-                  onClick={() => setQuickLinksExpanded(false)}
-                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:from-orange-200 group-hover:to-orange-300 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-2xl">📁</span>
-                  </div>
-                  <span className="text-sm font-semibold text-gray-700 group-hover:text-orange-700 transition-colors duration-300">资料下载</span>
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-50/0 to-orange-100/0 group-hover:from-orange-50/50 group-hover:to-orange-100/30 transition-all duration-300 pointer-events-none"></div>
-                </a>
-              </div>
-            </div>
+              <span className="relative z-10">校园招聘</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-300 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <span className="text-white/30">·</span>
+            <a 
+              href="/team-building" 
+              className="text-sm md:text-base text-white/80 hover:text-purple-300 transition-colors duration-200 relative group"
+            >
+              <span className="relative z-10">公司团建</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <span className="text-white/30">·</span>
+            <a 
+              href="/partners" 
+              className="text-sm md:text-base text-white/80 hover:text-pink-300 transition-colors duration-200 relative group"
+            >
+              <span className="relative z-10">公司合作伙伴</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pink-300 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <span className="text-white/30">·</span>
+            <a 
+              href="/financial-reports" 
+              className="text-sm md:text-base text-white/80 hover:text-yellow-300 transition-colors duration-200 relative group"
+            >
+              <span className="relative z-10">公司财报</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-300 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <span className="text-white/30">·</span>
+            <a 
+              href="/downloads" 
+              className="text-sm md:text-base text-white/80 hover:text-blue-300 transition-colors duration-200 relative group"
+            >
+              <span className="relative z-10">资料下载</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300"></span>
+            </a>
           </div>
         </div>
       </section>
@@ -381,55 +312,151 @@ export default function Home() {
       {/* Main Content */}
       <div className="flex-1">
 
-        {/* 英雄区域 */}
-        <section className="bg-gradient-to-br from-orange-400 via-orange-500 to-yellow-400 text-white py-32 relative overflow-hidden shadow-2xl">
-          {/* 背景装饰 */}
-          <div className="absolute inset-0 bg-black/10"></div>
-          <div className="absolute top-0 left-0 w-full h-full">
-            {/* 动态背景装饰 - 移动端简化 */}
-            <div 
-              className="hidden md:block absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse-glow"
-              style={{
-                transform: isClient && !isMobile ? `translate(${(mousePosition.x - window.innerWidth / 2) * 0.02}px, ${(mousePosition.y - window.innerHeight / 2) * 0.02}px)` : 'translate(0px, 0px)'
-              }}
-            ></div>
-            <div 
-              className="hidden md:block absolute bottom-20 right-20 w-40 h-40 bg-white/10 rounded-full blur-xl animate-pulse-glow"
-              style={{
-                transform: isClient && !isMobile ? `translate(${(mousePosition.x - window.innerWidth / 2) * -0.01}px, ${(mousePosition.y - window.innerHeight / 2) * -0.01}px)` : 'translate(0px, 0px)'
-              }}
-            ></div>
-            <div 
-              className="hidden lg:block absolute top-1/2 left-1/3 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse-glow"
-              style={{
-                transform: isClient && !isMobile ? `translate(${(mousePosition.x - window.innerWidth / 2) * 0.015}px, ${(mousePosition.y - window.innerHeight / 2) * 0.015}px)` : 'translate(0px, 0px)'
-              }}
-            ></div>
-            
-            {/* 浮动粒子效果 - 移动端减少数量 */}
-            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/30 rounded-full animate-float-mobile md:animate-float" style={{animationDelay: '0s'}}></div>
-            <div className="hidden md:block absolute top-1/3 right-1/4 w-1 h-1 bg-white/40 rounded-full animate-float" style={{animationDelay: '0.5s'}}></div>
-            <div className="hidden lg:block absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-white/35 rounded-full animate-float" style={{animationDelay: '1s'}}></div>
-            <div className="hidden lg:block absolute top-2/3 right-1/3 w-1 h-1 bg-white/45 rounded-full animate-float" style={{animationDelay: '1.5s'}}></div>
-            
-            {/* 动态装饰元素 - 移动端禁用 */}
-            <div className="hidden md:block absolute top-1/4 right-1/4 w-16 h-16 border-2 border-white/20 rounded-full animate-rotate-slow"></div>
-            <div className="hidden lg:block absolute bottom-1/4 left-1/4 w-12 h-12 border border-white/30 rounded-full animate-rotate-slow" style={{animationDirection: 'reverse'}}></div>
-            <div className="hidden md:block absolute top-3/4 right-1/3 w-8 h-8 bg-white/20 rounded-full animate-wave"></div>
+        {/* 英雄区域 - 科技风格 */}
+        <section className="relative overflow-hidden min-h-[90vh] flex flex-col">
+          {/* 科技感渐变背景 - 从温暖的橙蓝到深蓝紫 */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#ff8c42] via-[#ff6b6b] to-[#4a90e2]"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#667eea]/30 via-[#764ba2]/20 to-[#f093fb]/30"></div>
+          
+          {/* 代码背景层 - 增强版 */}
+          <div className="absolute inset-0 opacity-25 overflow-hidden">
+            {/* 代码行动画背景 */}
+            <div className="absolute inset-0 font-mono text-xs md:text-sm text-white/50">
+              {/* 代码行1 - 左侧 */}
+              <div className="absolute top-[8%] left-[3%] animate-pulse" style={{animationDelay: '0s'}}>
+                <span className="text-cyan-400/50">const</span> <span className="text-yellow-400/50">tech</span> = <span className="text-green-400/50">'innovation'</span>;
+              </div>
+              <div className="absolute top-[12%] left-[6%] animate-pulse" style={{animationDelay: '0.5s'}}>
+                <span className="text-cyan-400/50">function</span> <span className="text-yellow-400/50">createFuture</span>() {'{'}
+              </div>
+              <div className="absolute top-[16%] left-[10%] animate-pulse" style={{animationDelay: '1s'}}>
+                <span className="text-purple-400/50">return</span> <span className="text-green-400/50">'excellence'</span>;
+              </div>
+              <div className="absolute top-[20%] left-[10%] animate-pulse" style={{animationDelay: '1.5s'}}>
+                {'}'}
+              </div>
+              
+              {/* 代码行2 - 右侧 */}
+              <div className="absolute top-[30%] right-[8%] animate-pulse" style={{animationDelay: '2s'}}>
+                <span className="text-cyan-400/50">import</span> {'{'} <span className="text-yellow-400/50">AI</span>, <span className="text-yellow-400/50">ML</span> {'}'} <span className="text-cyan-400/50">from</span> <span className="text-green-400/50">'future'</span>;
+              </div>
+              <div className="absolute top-[34%] right-[6%] animate-pulse" style={{animationDelay: '2.5s'}}>
+                <span className="text-purple-400/50">export</span> <span className="text-cyan-400/50">default</span> <span className="text-yellow-400/50">TechCompany</span>;
           </div>
           
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+              {/* 代码行3 - 中间 */}
+              <div className="absolute top-[50%] left-[12%] animate-pulse" style={{animationDelay: '3s'}}>
+                {'<'}<span className="text-red-400/50">div</span> <span className="text-cyan-400/50">className</span>=<span className="text-green-400/50">"innovation"</span>{'>'}
+              </div>
+              <div className="absolute top-[54%] left-[17%] animate-pulse" style={{animationDelay: '3.5s'}}>
+                {'<'}<span className="text-yellow-400/50">Code</span> {'/>'}
+              </div>
+              <div className="absolute top-[58%] left-[12%] animate-pulse" style={{animationDelay: '4s'}}>
+                {'</'}<span className="text-red-400/50">div</span>{'>'}
+              </div>
+              
+              {/* 更多代码行 */}
+              <div className="absolute top-[70%] right-[12%] animate-pulse" style={{animationDelay: '4.5s'}}>
+                <span className="text-cyan-400/50">class</span> <span className="text-yellow-400/50">Server</span> {'{'}
+              </div>
+              <div className="absolute top-[74%] right-[10%] animate-pulse" style={{animationDelay: '5s'}}>
+                <span className="text-purple-400/50">async</span> <span className="text-yellow-400/50">deploy</span>() {'{'}
+              </div>
+              <div className="absolute top-[78%] right-[14%] animate-pulse" style={{animationDelay: '5.5s'}}>
+                <span className="text-purple-400/50">return</span> <span className="text-green-400/50">'success'</span>;
+              </div>
+              
+              {/* 终端窗口样式 - 左下 */}
+              <div className="absolute bottom-[25%] left-[5%] w-[350px] md:w-[480px] lg:w-[550px] bg-black/60 backdrop-blur-sm border-2 border-cyan-500/60 rounded-lg p-5 md:p-6 font-mono text-sm md:text-base shadow-2xl">
+                <div className="flex gap-2 mb-4">
+                  <div className="w-4 h-4 rounded-full bg-red-500/80"></div>
+                  <div className="w-4 h-4 rounded-full bg-yellow-500/80"></div>
+                  <div className="w-4 h-4 rounded-full bg-green-500/80"></div>
+                </div>
+                <div className="text-cyan-400/80 font-semibold">$ npm run innovation</div>
+                <div className="text-green-400/80 mt-3 text-sm md:text-base">✓ Building future...</div>
+                <div className="text-green-400/80 text-sm md:text-base">✓ Technology deployed</div>
+                <div className="text-white/70 mt-3 text-sm md:text-base">$ <span className="animate-pulse">_</span></div>
+              </div>
+              
+              {/* 服务器图标 - 右下 */}
+              <div className="absolute bottom-[20%] right-[8%] w-[220px] md:w-[300px] lg:w-[340px]">
+                <div className="bg-black/60 backdrop-blur-sm border-2 border-purple-500/60 rounded-lg p-5 md:p-6 font-mono text-sm md:text-base shadow-2xl">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-green-400/90 font-semibold">SERVER ONLINE</span>
+                  </div>
+                  <div className="text-cyan-400/80 mb-2 text-sm md:text-base">CPU: 45%</div>
+                  <div className="text-cyan-400/80 mb-2 text-sm md:text-base">RAM: 2.1GB / 8GB</div>
+                  <div className="text-cyan-400/80 text-sm md:text-base">Network: 127.0.0.1</div>
+                </div>
+              </div>
+              
+              {/* 电脑/显示器图标 - 右上 */}
+              <div className="absolute top-[15%] right-[5%] w-[240px] md:w-[320px] lg:w-[380px]">
+                <div className="bg-black/60 backdrop-blur-sm border-2 border-blue-500/60 rounded-lg p-5 md:p-6 font-mono text-sm md:text-base shadow-2xl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-blue-400/90 text-lg">💻</span>
+                    <span className="text-blue-400/90 font-semibold">DEV ENV</span>
+                  </div>
+                  <div className="text-white/70 space-y-2 text-sm md:text-base">
+                    <div>📁 src/</div>
+                    <div className="ml-4">📄 app.tsx</div>
+                    <div className="ml-4">📄 components/</div>
+                    <div className="ml-4">📄 utils/</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* 电路板图案 - 中间偏下 */}
+              <svg className="absolute bottom-[35%] left-[50%] transform -translate-x-1/2 w-[250px] h-[180px] opacity-25" viewBox="0 0 250 180">
+                {/* 电路线 */}
+                <path d="M10,20 L60,20 L60,50 L100,50 L100,20 L150,20" stroke="rgba(0,255,255,0.4)" strokeWidth="2" fill="none"/>
+                <path d="M10,80 L50,80 L50,110 L120,110 L120,80 L180,80" stroke="rgba(0,255,255,0.4)" strokeWidth="2" fill="none"/>
+                <path d="M10,140 L70,140 L70,160 L140,160" stroke="rgba(0,255,255,0.4)" strokeWidth="2" fill="none"/>
+                {/* 电路节点 */}
+                <circle cx="60" cy="20" r="4" fill="rgba(0,255,255,0.5)"/>
+                <circle cx="100" cy="50" r="4" fill="rgba(0,255,255,0.5)"/>
+                <circle cx="50" cy="80" r="4" fill="rgba(0,255,255,0.5)"/>
+                <circle cx="120" cy="110" r="4" fill="rgba(0,255,255,0.5)"/>
+                <circle cx="70" cy="140" r="4" fill="rgba(0,255,255,0.5)"/>
+                {/* 芯片 */}
+                <rect x="150" y="40" width="40" height="40" fill="rgba(138,43,226,0.3)" stroke="rgba(138,43,226,0.5)" strokeWidth="1.5"/>
+                <rect x="160" y="50" width="20" height="20" fill="rgba(138,43,226,0.4)"/>
+              </svg>
+            </div>
+          </div>
+          
+          
+          {/* 主要内容区域 */}
+          <div className="relative z-10 flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+            <div className="max-w-7xl mx-auto w-full">
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <h2 className="text-responsive font-extrabold mb-6 drop-shadow-lg tracking-wide text-white animate-fade-in-up">
+                {/* 左侧文字区域 */}
+                <div className="relative z-20 md:ml-[15%] max-w-3xl">
+                  {/* 主标题 - 大型白色文字 */}
+                  <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 drop-shadow-2xl tracking-wide text-white leading-tight animate-fade-in-up">
                 南京橙龙科技有限公司
               </h2>
-              <p className="text-2xl md:text-3xl mb-12 drop-shadow-lg font-medium text-white/90 max-w-4xl mx-auto animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+                  
+                  {/* 副标题 */}
+                  <p className="text-xl md:text-2xl lg:text-3xl mb-8 drop-shadow-lg font-medium text-white/95 leading-relaxed animate-fade-in-up" style={{animationDelay: '0.2s'}}>
                 专注于科技推广、出版与教育服务的创新型企业
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+                  
+                  {/* 英文标识 - 科技风格 */}
+                  <div className="mb-12 animate-fade-in-up" style={{animationDelay: '0.3s'}}>
+                    <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg mb-2 font-mono tracking-wider">
+                      <span className="text-cyan-300">TECH</span> <span className="text-purple-300">INNOVATION</span>
+                    </div>
+                    <div className="text-lg md:text-xl text-white/90 font-mono">科技创新 · 教育服务</div>
+                  </div>
+                  
+                  {/* 按钮组 */}
+                  <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
                 <button 
                   onClick={scrollToBusinessGallery}
-                  className="group bg-white text-orange-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-50 transition-all duration-300 transform hover:scale-105 shadow-lg relative overflow-hidden btn-glow animate-pulse-glow"
+                      className="group bg-white text-orange-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-50 transition-all duration-300 transform hover:scale-105 shadow-xl relative overflow-hidden btn-glow"
                 >
                   <span className="relative z-10">了解更多</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-yellow-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
@@ -437,11 +464,47 @@ export default function Home() {
                 </button>
                 <button 
                   onClick={() => setShowContactModal(true)}
-                  className="group border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-orange-600 transition-all duration-300 transform hover:scale-105 relative overflow-hidden btn-glow"
+                      className="group border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-orange-600 transition-all duration-300 transform hover:scale-105 relative overflow-hidden btn-glow backdrop-blur-sm"
                 >
                   <span className="relative z-10">联系我们</span>
                   <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* 底部内容卡片区域 - 科技风格卡片 */}
+          <div className="relative z-10 px-4 sm:px-6 lg:px-8 pb-12">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* 卡片1 - 科技出版 */}
+                <div className="group relative bg-black/20 backdrop-blur-md rounded-xl border border-cyan-500/30 p-6 hover:bg-black/30 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-cyan-500/20">
+                  <div className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="text-3xl mb-3">📚</div>
+                  <h3 className="text-white font-bold text-lg mb-2 font-mono">科技出版</h3>
+                  <p className="text-white/90 text-sm">专业的技术图书出版服务</p>
+                  <div className="mt-3 text-xs text-cyan-400/60 font-mono">[PUBLISH]</div>
+                </div>
+                
+                {/* 卡片2 - 技术推广 */}
+                <div className="group relative bg-black/20 backdrop-blur-md rounded-xl border border-purple-500/30 p-6 hover:bg-black/30 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-purple-500/20">
+                  <div className="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                  <div className="text-3xl mb-3">💡</div>
+                  <h3 className="text-white font-bold text-lg mb-2 font-mono">技术推广</h3>
+                  <p className="text-white/90 text-sm">前沿技术的普及与应用</p>
+                  <div className="mt-3 text-xs text-purple-400/60 font-mono">[INNOVATE]</div>
+                </div>
+                
+                {/* 卡片3 - 教育服务 */}
+                <div className="group relative bg-black/20 backdrop-blur-md rounded-xl border border-pink-500/30 p-6 hover:bg-black/30 hover:border-pink-400/50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-pink-500/20">
+                  <div className="absolute top-2 right-2 w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                  <div className="text-3xl mb-3">🎓</div>
+                  <h3 className="text-white font-bold text-lg mb-2 font-mono">教育服务</h3>
+                  <p className="text-white/90 text-sm">专业的教学资源与培训</p>
+                  <div className="mt-3 text-xs text-pink-400/60 font-mono">[EDUCATE]</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1178,7 +1241,7 @@ export default function Home() {
       </div>
       
       {/* 联系我们的模态框 */}
-      <ContactModal />
+      <ContactModal showContactModal={showContactModal} setShowContactModal={setShowContactModal} />
     </div>
   );
 } 

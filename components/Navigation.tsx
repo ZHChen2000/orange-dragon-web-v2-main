@@ -1,102 +1,68 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 export default function Navigation() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
   return (
-    <nav className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-30">
+    <nav className="bg-gradient-to-r from-[#1a1a2e]/95 via-[#16213e]/95 to-[#0f3460]/95 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-cyan-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-orange-600 flex items-center gap-2 hover:text-orange-700 transition-colors duration-200">
-              <span className="text-3xl">🐉</span>
-              南京橙龙科技有限公司
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between h-auto md:h-16 py-3 md:py-0">
+          {/* 左侧：Logo */}
+          <div className="flex items-center mb-3 md:mb-0">
+            <Link href="/" className="text-xl md:text-2xl font-bold text-white flex items-center gap-2 hover:text-orange-300 transition-colors duration-200">
+              <span className="text-2xl md:text-3xl">🐉</span>
+              <span className="hidden sm:inline">南京橙龙科技有限公司</span>
+              <span className="sm:hidden">橙龙科技</span>
             </Link>
           </div>
-          <div className="flex items-center">
-            {/* 下拉菜单按钮 */}
-            <div className="relative">
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-orange-600 rounded-lg transition-all duration-200 font-medium group relative"
-                aria-expanded={dropdownOpen}
-                aria-haspopup="true"
-              >
-                <span>快速访问</span>
-                {/* 点击小手图标 - 带动画效果 */}
-                <span className="text-lg animate-bounce group-hover:animate-none group-hover:scale-110 transition-transform duration-200">👆</span>
-                <svg 
-                  className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              {/* 下拉菜单 */}
-              {dropdownOpen && (
-                <>
-                  {/* 点击外部关闭菜单的遮罩 */}
-                  <div 
-                    className="fixed inset-0 z-40" 
-                    onClick={() => setDropdownOpen(false)}
-                  />
-                  {/* 菜单内容 */}
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-2xl z-50 py-2 overflow-hidden">
-                    <Link 
-                      href="/#business-gallery"
-                      onClick={() => setDropdownOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
-                    >
-                      业务展示
-                    </Link>
-                    <Link 
-                      href="/#publishers"
-                      onClick={() => setDropdownOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
-                    >
-                      合作出版社
-                    </Link>
-                    <Link 
-                      href="/#about"
-                      onClick={() => setDropdownOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
-                    >
-                      公司简介
-                    </Link>
-                    <Link 
-                      href="/#team"
-                      onClick={() => setDropdownOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
-                    >
-                      核心团队
-                    </Link>
-                    <Link 
-                      href="/#business"
-                      onClick={() => setDropdownOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
-                    >
-                      主营业务
-                    </Link>
-                    <Link 
-                      href="/#contact"
-                      onClick={() => setDropdownOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
-                    >
-                      联系我们
-                    </Link>
-                  </div>
-                </>
-              )}
-            </div>
+          
+          {/* 右侧：快速访问链接 */}
+          <div className="flex flex-wrap items-center justify-start md:justify-end gap-x-4 gap-y-2">
+            <Link 
+              href="/#business-gallery"
+              className="text-xs md:text-sm text-white/70 hover:text-cyan-300 transition-colors duration-200"
+            >
+              业务展示
+            </Link>
+            <span className="text-white/30 hidden md:inline">·</span>
+            <Link 
+              href="/#publishers"
+              className="text-xs md:text-sm text-white/70 hover:text-cyan-300 transition-colors duration-200"
+            >
+              合作出版社
+            </Link>
+            <span className="text-white/30 hidden md:inline">·</span>
+            <Link 
+              href="/#about"
+              className="text-xs md:text-sm text-white/70 hover:text-cyan-300 transition-colors duration-200"
+            >
+              公司简介
+            </Link>
+            <span className="text-white/30 hidden md:inline">·</span>
+            <Link 
+              href="/#team"
+              className="text-xs md:text-sm text-white/70 hover:text-cyan-300 transition-colors duration-200"
+            >
+              核心团队
+            </Link>
+            <span className="text-white/30 hidden md:inline">·</span>
+            <Link 
+              href="/#business"
+              className="text-xs md:text-sm text-white/70 hover:text-cyan-300 transition-colors duration-200"
+            >
+              主营业务
+            </Link>
+            <span className="text-white/30 hidden md:inline">·</span>
+            <Link 
+              href="/#contact"
+              className="text-xs md:text-sm text-white/70 hover:text-cyan-300 transition-colors duration-200"
+            >
+              联系我们
+            </Link>
           </div>
         </div>
       </div>
     </nav>
   );
-} 
+}
