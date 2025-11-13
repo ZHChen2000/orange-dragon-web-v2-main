@@ -121,6 +121,13 @@ body {
 /* 自定义类 */
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* 移动端简化版浮动动画 */
+.animate-float-mobile {
+  animation: float 8s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-pulse-glow {
@@ -141,6 +148,7 @@ body {
 
 .animate-rotate-slow {
   animation: rotate-slow 20s linear infinite;
+  will-change: transform;
 }
 
 .animate-shimmer {
@@ -151,6 +159,7 @@ body {
 
 .animate-wave {
   animation: wave 2s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-pulse-glow-subtle {
@@ -163,6 +172,74 @@ body {
 
 .animate-stats-card-float {
   animation: stats-card-float 6s ease-in-out infinite;
+}
+
+/* 移动端优化：减少动画和效果 */
+@media (max-width: 768px) {
+  /* 禁用或简化某些动画 */
+  .animate-pulse-glow {
+    animation: none;
+    box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+  }
+  
+  .animate-pulse-glow-subtle {
+    animation: none;
+    opacity: 0.4;
+  }
+  
+  .animate-rotate-slow {
+    animation: none;
+  }
+  
+  .animate-wave {
+    animation: none;
+  }
+  
+  /* 简化渐变文字动画 */
+  .gradient-text {
+    animation: none;
+    background: linear-gradient(45deg, #f97316, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* 减少hover效果 */
+  .hover-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .stats-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* 减少blur效果 */
+  .glass {
+    backdrop-filter: blur(5px);
+  }
+}
+
+/* 支持减少动画偏好的用户 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-float,
+  .animate-float-mobile,
+  .animate-pulse-glow,
+  .animate-rotate-slow,
+  .animate-wave,
+  .animate-pulse-glow-subtle,
+  .animate-stats-card-float {
+    animation: none !important;
+  }
 }
 
 
@@ -298,5 +375,22 @@ body {
 @media (min-width: 1025px) {
   .text-responsive {
     font-size: 2.5rem;
+  }
+}
+
+/* 移动端性能优化：减少blur和复杂效果 */
+@media (max-width: 768px) {
+  /* 减少blur效果强度 */
+  [class*="blur-xl"],
+  [class*="blur-2xl"],
+  [class*="blur-3xl"] {
+    filter: blur(8px) !important;
+  }
+  
+  /* 优化transform性能 */
+  [class*="animate-"] {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 } 
