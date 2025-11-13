@@ -76,13 +76,13 @@ function AnimatedCounter({ target, suffix = '', duration = 2000, className = '' 
 }
 
 export default function Home() {
-  const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('');
   const [showContactModal, setShowContactModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [quickLinksExpanded, setQuickLinksExpanded] = useState(false);
   const isClient = useIsClient();
 
   useEffect(() => {
@@ -250,70 +250,111 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen relative">
+    <div className="min-h-screen">
+      {/* 导航栏 */}
+      <Navigation />
 
-      {/* Sidebar with integrated toggle button */}
-      <div
-        className={`fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-gray-800 to-gray-900 text-white transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out z-40 flex flex-col shadow-2xl`}
-      >
-        {/* Sidebar Header with Toggle Button */}
-        <div className="flex items-center justify-between h-16 px-4 bg-gray-900 border-b border-gray-700">
-          <div className="flex items-center gap-2">
-            <span className="text-orange-400 text-xl">🐉</span>
-            <h2 className="text-xl font-semibold">公司导航</h2>
-          </div>
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-md bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white transition-all duration-200 hover:scale-110"
-            aria-label="Toggle sidebar"
-          >
-            {sidebarOpen ? '✕' : '☰'}
-          </button>
-        </div>
-        
-        {/* Sidebar Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-3 overflow-y-auto">
-          <a href="/campus-recruitment" onClick={() => setSidebarOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 hover:translate-x-2">
-            <span className="text-lg">🎓</span>
-            <span>校园招聘</span>
-          </a>
-          <a href="/team-building" onClick={() => setSidebarOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 hover:translate-x-2">
-            <span className="text-lg">👥</span>
-            <span>公司团建</span>
-          </a>
-          <a href="/partners" onClick={() => setSidebarOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 hover:translate-x-2">
-            <span className="text-lg">🤝</span>
-            <span>公司合作伙伴</span>
-          </a>
-          <a href="/financial-reports" onClick={() => setSidebarOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 hover:translate-x-2">
-            <span className="text-lg">📊</span>
-            <span>公司财报</span>
-          </a>
-          <a href="/downloads" onClick={() => setSidebarOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 hover:translate-x-2">
-            <span className="text-lg">📁</span>
-            <span>资料下载</span>
-          </a>
-        </nav>
-      </div>
-
-      {/* Floating Toggle Button (when sidebar is closed) */}
-      {!sidebarOpen && (
+      {/* 快速链接收缩栏 */}
+      <section className="relative border-b border-gray-100/50 overflow-hidden">
+        {/* 收缩按钮栏 */}
         <button
-          onClick={() => setSidebarOpen(true)}
-          className="fixed top-1/2 left-0 z-50 -translate-y-1/2 w-6 h-20 bg-gray-700 text-gray-300 shadow-lg hover:bg-gray-600 hover:text-white transition-all duration-300 transform hover:translate-x-1 border-r border-gray-600 rounded-r-md"
-          aria-label="Open sidebar"
+          onClick={() => setQuickLinksExpanded(!quickLinksExpanded)}
+          className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 transition-colors duration-200 group"
         >
-          <div className="flex flex-col items-center justify-center h-full gap-1">
-            <span className="text-xs">☰</span>
-            <span className="text-xs rotate-90 whitespace-nowrap tracking-wider">导航</span>
-          </div>
+          <span className="text-sm font-medium text-gray-600 group-hover:text-orange-600 transition-colors duration-200">公司详情页</span>
+          <svg 
+            className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${quickLinksExpanded ? 'rotate-180' : ''}`}
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
-      )}
+        
+        {/* 可展开的内容区域 */}
+        <div 
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            quickLinksExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="relative bg-gradient-to-b from-gray-50 via-white to-white py-6">
+            {/* 装饰性背景元素 */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-0 left-1/4 w-32 h-32 bg-orange-100/20 rounded-full blur-3xl"></div>
+              <div className="absolute top-0 right-1/4 w-40 h-40 bg-yellow-100/20 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              {/* 链接卡片 */}
+              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-3">
+                <a 
+                  href="/campus-recruitment" 
+                  onClick={() => setQuickLinksExpanded(false)}
+                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center group-hover:from-purple-200 group-hover:to-purple-300 transition-all duration-300 group-hover:scale-110">
+                    <span className="text-2xl">🎓</span>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-700 group-hover:text-purple-700 transition-colors duration-300">校园招聘</span>
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-50/0 to-purple-100/0 group-hover:from-purple-50/50 group-hover:to-purple-100/30 transition-all duration-300 pointer-events-none"></div>
+                </a>
+                
+                <a 
+                  href="/team-building" 
+                  onClick={() => setQuickLinksExpanded(false)}
+                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:from-blue-200 group-hover:to-blue-300 transition-all duration-300 group-hover:scale-110">
+                    <span className="text-2xl">👥</span>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-700 group-hover:text-blue-700 transition-colors duration-300">公司团建</span>
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-50/0 to-blue-100/0 group-hover:from-blue-50/50 group-hover:to-blue-100/30 transition-all duration-300 pointer-events-none"></div>
+                </a>
+                
+                <a 
+                  href="/partners" 
+                  onClick={() => setQuickLinksExpanded(false)}
+                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-amber-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center group-hover:from-amber-200 group-hover:to-amber-300 transition-all duration-300 group-hover:scale-110">
+                    <span className="text-2xl">🤝</span>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-700 group-hover:text-amber-700 transition-colors duration-300">公司合作伙伴</span>
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-50/0 to-amber-100/0 group-hover:from-amber-50/50 group-hover:to-amber-100/30 transition-all duration-300 pointer-events-none"></div>
+                </a>
+                
+                <a 
+                  href="/financial-reports" 
+                  onClick={() => setQuickLinksExpanded(false)}
+                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-pink-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center group-hover:from-pink-200 group-hover:to-pink-300 transition-all duration-300 group-hover:scale-110">
+                    <span className="text-2xl">📊</span>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-700 group-hover:text-pink-700 transition-colors duration-300">公司财报</span>
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-50/0 to-pink-100/0 group-hover:from-pink-50/50 group-hover:to-pink-100/30 transition-all duration-300 pointer-events-none"></div>
+                </a>
+                
+                <a 
+                  href="/downloads" 
+                  onClick={() => setQuickLinksExpanded(false)}
+                  className="group relative flex flex-col items-center justify-center gap-2 px-6 py-4 bg-white rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 hover:-translate-y-1 min-w-[120px] quick-link-card"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:from-orange-200 group-hover:to-orange-300 transition-all duration-300 group-hover:scale-110">
+                    <span className="text-2xl">📁</span>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-700 group-hover:text-orange-700 transition-colors duration-300">资料下载</span>
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-50/0 to-orange-100/0 group-hover:from-orange-50/50 group-hover:to-orange-100/30 transition-all duration-300 pointer-events-none"></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Main Content */}
-      <div className={`flex-1 ${sidebarOpen ? 'ml-64' : 'ml-0'} transition-all duration-300 ease-in-out`}>
-        {/* 导航栏 */}
-        <Navigation showSidebar={sidebarOpen} onSidebarToggle={setSidebarOpen} />
+      <div className="flex-1">
 
         {/* 英雄区域 */}
         <section className="bg-gradient-to-br from-orange-400 via-orange-500 to-yellow-400 text-white py-32 relative overflow-hidden shadow-2xl">

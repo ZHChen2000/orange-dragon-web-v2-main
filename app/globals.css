@@ -378,6 +378,31 @@ body {
   }
 }
 
+/* 侧边栏性能优化 */
+.sidebar-mobile {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.sidebar-link {
+  transform: translateZ(0);
+  will-change: transform, background-color;
+}
+
+/* 快速链接卡片优化 */
+.quick-link-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.quick-link-card:hover {
+  transform: translateY(-4px) translateZ(0);
+}
+
 /* 移动端性能优化：减少blur和复杂效果 */
 @media (max-width: 768px) {
   /* 减少blur效果强度 */
@@ -392,5 +417,20 @@ body {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
+  }
+  
+  /* 侧边栏移动端优化 */
+  .sidebar-mobile {
+    /* 使用更简单的阴影 */
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  /* 禁用侧边栏链接的transform动画 */
+  .sidebar-link {
+    will-change: background-color;
+  }
+  
+  .sidebar-link:hover {
+    transform: none !important;
   }
 } 

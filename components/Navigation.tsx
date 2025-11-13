@@ -3,12 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-interface NavigationProps {
-  showSidebar?: boolean;
-  onSidebarToggle?: (open: boolean) => void;
-}
+export default function Navigation() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-export default function Navigation({ showSidebar = false, onSidebarToggle }: NavigationProps) {
   return (
     <nav className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,42 +16,69 @@ export default function Navigation({ showSidebar = false, onSidebarToggle }: Nav
               南京橙龙科技有限公司
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-6">
-            <Link 
-              href="/#about" 
-              className="px-3 py-2 font-medium text-gray-600 hover:text-orange-600 transition-colors duration-200"
-            >
-              公司简介
-            </Link>
-            <Link 
-              href="/#team" 
-              className="px-3 py-2 font-medium text-gray-600 hover:text-orange-600 transition-colors duration-200"
-            >
-              核心团队
-            </Link>
-            <Link 
-              href="/#business" 
-              className="px-3 py-2 font-medium text-gray-600 hover:text-orange-600 transition-colors duration-200"
-            >
-              主营业务
-            </Link>
-            <Link 
-              href="/#contact" 
-              className="px-3 py-2 font-medium text-gray-600 hover:text-orange-600 transition-colors duration-200"
-            >
-              联系我们
-            </Link>
-          </div>
-          {onSidebarToggle && (
-            <div className="md:hidden flex items-center">
+          <div className="flex items-center">
+            {/* 下拉菜单按钮 */}
+            <div className="relative">
               <button
-                onClick={() => onSidebarToggle(!showSidebar)}
-                className="p-2 rounded-md text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-colors duration-200"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200 font-medium"
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
               >
-                ☰
+                <span>快速到达</span>
+                <svg 
+                  className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
+              
+              {/* 下拉菜单 */}
+              {dropdownOpen && (
+                <>
+                  {/* 点击外部关闭菜单的遮罩 */}
+                  <div 
+                    className="fixed inset-0 z-40" 
+                    onClick={() => setDropdownOpen(false)}
+                  />
+                  {/* 菜单内容 */}
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 py-2">
+                    <Link 
+                      href="/#about"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
+                    >
+                      公司简介
+                    </Link>
+                    <Link 
+                      href="/#team"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
+                    >
+                      核心团队
+                    </Link>
+                    <Link 
+                      href="/#business"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
+                    >
+                      主营业务
+                    </Link>
+                    <Link 
+                      href="/#contact"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
+                    >
+                      联系我们
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </nav>
