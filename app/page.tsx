@@ -1171,11 +1171,28 @@ export default function Home() {
           <ContactSection />
         </div>
 
-        {/* 页脚 */}
-        <footer className="bg-gradient-to-r from-orange-600 to-yellow-500 text-white py-12 relative overflow-hidden">
+        {/* 页脚 - 橙色风格 */}
+        <footer className="bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 text-white py-12 relative overflow-hidden">
           {/* 背景装饰 */}
-          <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float"></div>
-          <div className="hidden md:block absolute bottom-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float"></div>
+          <div className="hidden md:block absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+          
+          {/* 科技元素装饰 - 半透明 */}
+          <div className="absolute inset-0 opacity-15 overflow-hidden pointer-events-none">
+            {/* 代码行装饰 */}
+            <div className="absolute top-10 left-10 font-mono text-xs text-white/40">
+              <div className="animate-pulse">// Footer</div>
+            </div>
+            <div className="absolute top-20 right-20 font-mono text-xs text-white/40">
+              <div className="animate-pulse" style={{animationDelay: '1s'}}>const links = []</div>
+            </div>
+            
+            {/* 网格背景 */}
+            <div className="absolute inset-0" style={{
+              backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+              backgroundSize: '50px 50px'
+            }}></div>
+          </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -1221,7 +1238,7 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-orange-200 text-center text-orange-100 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+            <div className="mt-12 pt-8 border-t border-orange-200/50 text-center text-orange-100 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
               <p>&copy; 2024 南京橙龙科技有限公司 保留所有权利</p>
               <div className="mt-4 flex flex-col sm:flex-row justify-center items-center gap-4 text-sm">
                 <span>苏ICP备2024100441号-1</span>
