@@ -2,8 +2,12 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI || '';
 
-if (!MONGODB_URI) {
-  throw new Error('请在环境变量中定义 MONGODB_URI');
+// 只在运行时检查，不在构建时抛出错误
+function getMongoUri() {
+  if (!MONGODB_URI) {
+    throw new Error('请在环境变量中定义 MONGODB_URI');
+  }
+  return MONGODB_URI;
 }
 
 interface MongooseCache {
@@ -27,11 +31,12 @@ async function connectDB() {
   }
 
   if (!cached.promise) {
+    const uri = getMongoUri(); // 在运行时获取 URI
     const opts = {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(uri, opts).then((mongoose) => {
       return mongoose;
     });
   }
