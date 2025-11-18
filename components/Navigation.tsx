@@ -2,8 +2,18 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function Navigation() {
+  const { user, logout, isLoading } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
+
   return (
     <nav className="bg-gradient-to-r from-[#1a1a2e]/95 via-[#16213e]/95 to-[#0f3460]/95 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-cyan-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,7 +27,7 @@ export default function Navigation() {
             </Link>
           </div>
           
-          {/* 右侧：快速访问链接 */}
+          {/* 右侧：快速访问链接和登录/登出 */}
           <div className="flex flex-wrap items-center justify-start md:justify-end gap-x-4 gap-y-2">
             <Link 
               href="/#business-gallery"
@@ -60,6 +70,41 @@ export default function Navigation() {
             >
               联系我们
             </Link>
+            
+            {/* 登录/登出按钮 */}
+            {!isLoading && (
+              <>
+                <span className="text-white/30 hidden md:inline">·</span>
+                {user ? (
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs md:text-sm text-white/70">
+                      欢迎，{user.name}
+                    </span>
+                    <button
+                      onClick={handleLogout}
+                      className="text-xs md:text-sm text-white/70 hover:text-orange-300 transition-colors duration-200 px-3 py-1 border border-white/30 rounded-lg hover:border-orange-300"
+                    >
+                      登出
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Link
+                      href="/login"
+                      className="text-xs md:text-sm text-white/70 hover:text-orange-300 transition-colors duration-200 px-3 py-1 border border-white/30 rounded-lg hover:border-orange-300"
+                    >
+                      登录
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="text-xs md:text-sm bg-orange-500 text-white px-3 py-1 rounded-lg hover:bg-orange-600 transition-colors duration-200"
+                    >
+                      注册
+                    </Link>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

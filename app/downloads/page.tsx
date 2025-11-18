@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import BackToHomeButton from '@/components/BackToHomeButton';
 import Navigation from '../../components/Navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface DownloadItem {
   id: string;
@@ -19,8 +22,54 @@ interface DownloadItem {
 }
 
 export default function DownloadsPage() {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
+
+  // 检查用户是否已登录
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.push('/login');
+    }
+  }, [user, isLoading, router]);
+
+  // 如果正在加载或用户未登录，显示加载状态或重定向
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
+          <div className="text-center">
+            <div className="text-4xl mb-4 animate-spin">⏳</div>
+            <p className="text-gray-600">加载中...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 如果用户未登录，显示提示（实际上会被 useEffect 重定向）
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
+          <div className="text-center bg-white rounded-2xl shadow-xl p-8 max-w-md">
+            <div className="text-6xl mb-4">🔒</div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">需要登录</h2>
+            <p className="text-gray-600 mb-6">您需要登录后才能访问资料下载页面</p>
+            <Link
+              href="/login"
+              className="inline-block bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-yellow-600 transition-all duration-300"
+            >
+              前往登录
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const downloadItems: DownloadItem[] = [
     // 出版SOP流程

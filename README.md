@@ -13,6 +13,9 @@
 - **样式**: Tailwind CSS
 - **动画**: Framer Motion
 - **图标**: Heroicons
+- **数据库**: MongoDB (Mongoose)
+- **认证**: JWT (JSON Web Token)
+- **密码加密**: bcryptjs
 
 ## 功能特性
 
@@ -24,6 +27,10 @@
 - 👥 团队介绍
 - 📊 业绩数据展示
 - 📧 联系方式
+- 🔐 **用户认证系统**（注册、登录、登出）
+- 🔒 **受保护的资料下载页面**（需要登录才能访问）
+- 💾 **数据库存储**（用户数据存储在 MongoDB 中）
+- 🌐 **跨设备访问**（用户可在任何设备上登录访问账户）
 
 ## 开发指南
 
@@ -39,6 +46,24 @@ npm install
 # 或
 yarn install
 ```
+
+### 环境变量配置
+
+**重要**: 在运行项目之前，需要配置环境变量。请参考 [ENV_SETUP.md](./ENV_SETUP.md) 文件了解详细配置说明。
+
+快速开始：
+
+1. 在项目根目录创建 `.env.local` 文件
+2. 添加以下内容：
+
+```env
+MONGODB_URI=mongodb://localhost:27017/orange-dragon-web
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+```
+
+**MongoDB 设置选项**：
+- **本地 MongoDB**: 安装并启动本地 MongoDB 服务
+- **MongoDB Atlas**（推荐）: 使用免费的云数据库服务，详见 [ENV_SETUP.md](./ENV_SETUP.md)
 
 ### 开发模式
 
@@ -82,6 +107,14 @@ orange-dragon-web-v2-main/
 │   ├── page.tsx           # 首页
 │   ├── layout.tsx         # 根布局
 │   ├── globals.css        # 全局样式
+│   ├── api/               # API 路由
+│   │   └── auth/          # 认证相关 API
+│   │       ├── register/  # 注册接口
+│   │       ├── login/     # 登录接口
+│   │       └── me/        # 获取用户信息接口
+│   ├── login/             # 登录页面
+│   ├── register/          # 注册页面
+│   ├── downloads/         # 资料下载页面（需要登录）
 │   ├── campus-recruitment/ # 校园招聘页面
 │   ├── team-building/     # 团建活动页面
 │   ├── partners/          # 合作伙伴页面
@@ -89,9 +122,17 @@ orange-dragon-web-v2-main/
 ├── components/            # React 组件
 │   ├── Navigation.tsx    # 导航栏
 │   └── ContactSection.tsx # 联系部分
+├── contexts/             # React Context
+│   └── AuthContext.tsx   # 认证上下文
+├── lib/                  # 工具库
+│   ├── mongodb.ts        # MongoDB 连接
+│   └── jwt.ts            # JWT 工具函数
+├── models/               # 数据模型
+│   └── User.ts           # 用户模型
 ├── public/               # 静态资源
 ├── package.json          # 项目配置
-└── README.md            # 项目说明
+├── README.md            # 项目说明
+└── ENV_SETUP.md         # 环境变量配置说明
 ```
 
 ## 部署
@@ -106,8 +147,13 @@ orange-dragon-web-v2-main/
 
 ### 环境变量
 
-如需配置环境变量，在 Vercel 项目设置中添加：
-- 在项目设置 → Environment Variables 中添加所需变量
+在 Vercel 项目设置中添加环境变量：
+- `MONGODB_URI`: MongoDB 连接字符串
+- `JWT_SECRET`: JWT 密钥（用于生成和验证 token）
+
+**重要**: 
+- 生产环境请使用 MongoDB Atlas 或其他云数据库服务
+- 使用强随机字符串作为 JWT_SECRET（可使用 `openssl rand -base64 32` 生成）
 
 ## 联系方式
 
