@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
     const wasActive = user.membershipStatus === 'active' && user.membershipExpiresAt && user.membershipExpiresAt > now;
     const isRenewal = wasActive;
 
-    if (wasActive) {
+    if (wasActive && user.membershipExpiresAt) {
       // 如果用户已有会员且未过期，在现有到期时间基础上延长
       const currentExpiresAt = user.membershipExpiresAt;
       if (inviteCode.membershipType === 'monthly') {
