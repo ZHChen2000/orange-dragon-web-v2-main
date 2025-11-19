@@ -13,6 +13,18 @@ MONGODB_URI=mongodb://localhost:27017/orange-dragon-web
 # JWT 密钥（用于生成和验证 token，请使用强随机字符串）
 # 可以使用以下命令生成: openssl rand -base64 32
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+
+# 支付宝支付配置（可选，如果不配置将无法使用支付功能）
+# 详细配置请参考: ALIPAY_SETUP_GUIDE.md
+ALIPAY_APP_ID=你的APPID
+ALIPAY_PRIVATE_KEY=你的应用私钥
+ALIPAY_PUBLIC_KEY=支付宝公钥
+ALIPAY_GATEWAY=https://openapi.alipay.com/gateway.do
+# 沙箱环境: https://openapi.alipaydev.com/gateway.do
+
+# 网站基础 URL（用于支付回调，生产环境必须配置）
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+# 生产环境: https://your-domain.com
 ```
 
 ## MongoDB 设置选项

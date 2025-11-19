@@ -6,6 +6,9 @@ interface User {
   id: string;
   email: string;
   name: string;
+  membershipType?: 'none' | 'monthly' | 'yearly';
+  membershipStatus?: 'none' | 'active' | 'expired';
+  membershipExpiresAt?: string;
 }
 
 interface AuthContextType {

@@ -3,9 +3,12 @@ import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import { verifyToken } from '@/lib/jwt';
 
+// 标记为动态路由
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
-    // 从请求头获取 token
+    // 验证用户身份
     const authHeader = request.headers.get('authorization');
     const token = authHeader?.replace('Bearer ', '');
 
@@ -16,7 +19,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // 验证 token
     const payload = verifyToken(token);
     if (!payload) {
       return NextResponse.json(
@@ -25,7 +27,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // 连接数据库
     await connectDB();
 
     // 查找用户
@@ -44,28 +45,21 @@ export async function GET(request: NextRequest) {
       await user.save();
     }
 
-    // 返回用户信息（不包含密码）
     return NextResponse.json(
       {
-        user: {
-          id: user._id.toString(),
-          email: user.email,
-          name: user.name,
-          avatar: user.avatar || '',
-          loginCount: user.loginCount || 0,
-          lastLoginAt: user.lastLoginAt?.toISOString(),
-          createdAt: user.createdAt.toISOString(),
-          membershipType: user.membershipType || 'none',
-          membershipStatus: user.membershipStatus || 'none',
-          membershipExpiresAt: user.membershipExpiresAt?.toISOString(),
+        membership: {
+          type: user.membershipType,
+          status: user.membershipStatus,
+          expiresAt: user.membershipExpiresAt?.toISOString(),
+          isActive: user.isMemberActive(),
         },
       },
       { status: 200 }
     );
   } catch (error: any) {
-    console.error('获取用户信息错误:', error);
+    console.error('获取会员状态错误:', error);
     return NextResponse.json(
-      { error: error.message || '获取用户信息失败' },
+      { error: error.message || '获取会员状态失败' },
       { status: 500 }
     );
   }

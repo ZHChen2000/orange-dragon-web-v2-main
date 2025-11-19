@@ -6,12 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-invite-codes": "node scripts/generate-invite-codes.js",
+    "generate-invite-codes-ts": "ts-node --esm scripts/generate-invite-codes.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "alipay-sdk": "^4.14.0",
     "autoprefixer": "^10.4.16",
     "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
     "framer-motion": "^10.18.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.20.0",

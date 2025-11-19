@@ -1,13 +1,23 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
+export type MembershipType = 'none' | 'monthly' | 'yearly';
+export type MembershipStatus = 'active' | 'expired' | 'none';
+
 export interface IUser extends Document {
   email: string;
   password: string;
   name: string;
+  avatar?: string;
+  loginCount: number;
+  lastLoginAt?: Date;
+  membershipType: MembershipType;
+  membershipStatus: MembershipStatus;
+  membershipExpiresAt?: Date;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
+  isMemberActive(): boolean;
 }
 
 const UserSchema: Schema = new Schema(
@@ -29,6 +39,30 @@ const UserSchema: Schema = new Schema(
       type: String,
       required: [true, '姓名是必填项'],
       trim: true,
+    },
+    avatar: {
+      type: String,
+      default: '', // 默认头像，可以使用默认头像 URL 或空字符串
+    },
+    loginCount: {
+      type: Number,
+      default: 0,
+    },
+    lastLoginAt: {
+      type: Date,
+    },
+    membershipType: {
+      type: String,
+      enum: ['none', 'monthly', 'yearly'],
+      default: 'none',
+    },
+    membershipStatus: {
+      type: String,
+      enum: ['none', 'active', 'expired'],
+      default: 'none',
+    },
+    membershipExpiresAt: {
+      type: Date,
     },
   },
   {
@@ -57,6 +91,17 @@ UserSchema.methods.comparePassword = async function (
   candidatePassword: string
 ): Promise<boolean> {
   return bcrypt.compare(candidatePassword, this.password);
+};
+
+// 检查会员是否有效
+UserSchema.methods.isMemberActive = function (): boolean {
+  if (this.membershipStatus !== 'active') {
+    return false;
+  }
+  if (!this.membershipExpiresAt) {
+    return false;
+  }
+  return new Date() < this.membershipExpiresAt;
 };
 
 // 确保模型只被创建一次

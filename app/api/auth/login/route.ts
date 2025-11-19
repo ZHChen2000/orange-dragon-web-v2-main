@@ -36,6 +36,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 更新登录次数和最后登录时间
+    user.loginCount = (user.loginCount || 0) + 1;
+    user.lastLoginAt = new Date();
+    
+    // 检查会员是否过期
+    const isActive = user.isMemberActive();
+    if (!isActive && user.membershipStatus === 'active') {
+      user.membershipStatus = 'expired';
+    }
+    
+    await user.save();
+
     // 生成 token
     const token = generateToken({
       userId: user._id.toString(),
@@ -50,6 +62,13 @@ export async function POST(request: NextRequest) {
           id: user._id.toString(),
           email: user.email,
           name: user.name,
+          avatar: user.avatar || '',
+          loginCount: user.loginCount,
+          lastLoginAt: user.lastLoginAt?.toISOString(),
+          createdAt: user.createdAt.toISOString(),
+          membershipType: user.membershipType || 'none',
+          membershipStatus: user.membershipStatus || 'none',
+          membershipExpiresAt: user.membershipExpiresAt?.toISOString(),
         },
         token,
       },
